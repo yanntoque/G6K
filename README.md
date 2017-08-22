@@ -36,8 +36,8 @@
   * database_path => used in the case of SQLite and ignored in other cases, so make &lt;Enter&gt;
   * locale => en 
 6. If database user is not present run this command : 
-   *``cd simulator``
-   *``php ../composer.phar run-script post-install-cmd`` 
+  *``cd simulator``
+  *``php ../composer.phar run-script post-install-cmd`` 
 
 
 ## Copyright and license
