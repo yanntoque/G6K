@@ -40,6 +40,9 @@ G6K is a tool that allows to create calculation simulators without computer codi
   * database_password => this user's password (simply &lt;Enter&gt; in case of SQLite)
   * database_path => used in the case of SQLite and ignored in other cases, so make &lt;Enter&gt;
   * locale => en 
+6. If database user is not present run this command : 
+   *``cd simulator``
+   *``php ../composer.phar run-script post-install-cmd``
 
 Normally the installer displays the message 'Installing the users of the administration interface'  
 However, on some platforms, this message does not appear. If so, run the following commands:  
