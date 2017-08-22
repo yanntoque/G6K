@@ -37,7 +37,7 @@
   * locale => en 
 6. If database user is not present run this command : 
    *``cd simulator``
-   *``php ../composer.phar run-script post-install-cmd``
+   *``php ../composer.phar run-script post-install-cmd`` 
 
 
 ## Copyright and license
