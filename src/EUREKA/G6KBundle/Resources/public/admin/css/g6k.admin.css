@@ -247,7 +247,7 @@ ul.rule-conditions > li {
 .expand-all, .collapse-all, 
 .edit-table-button, .drop-table-button, .import-table-button,
 .export-datasource-button, .edit-datasource-button, .drop-datasource-button,
-.view-button, .drop-view-button ,
+.view-button, .drop-view-button , .help-view-button ,
 .edit-profiles-label, .add-profile, .edit-profile, .delete-profile, .add-profile-data, .edit-profile-data, .delete-profile-data,
 .edit-source, .delete-source, .add-source-parameter, .delete-source-parameter,
 .btn-group.update-button {
@@ -446,33 +446,4 @@ var.data {
 	border: 1px solid #AAA;
 	background: #FFFFE0;
 	border-radius: 8px; 
-}
-#page div.span9 {
-	margin-left: 22em;
-}
-#page ul.bs-docs-sidenav {
-	margin-top: 20em;
-}
-#page div.span9 img {
-	width: auto;
-	height: auto;
-	max-width: 100%;
-	vertical-align: middle;
-	border: 0;
-	-ms-interpolation-mode: bicubic;
-}
-.bs-docs-sidenav > li[data-level="2"] > a {
-	padding-left: 30px;
-}
-.bs-docs-sidenav > li[data-level="3"] > a {
-	padding-left: 45px;
-}
-.bs-docs-sidenav > li[data-level="4"] > a {
-	padding-left: 60px;
-}
-.bs-docs-sidenav > li[data-level="5"] > a {
-	padding-left: 75px;
-}
-.bs-docs-sidenav > li[data-level="6"] > a {
-	padding-left: 90px;
 }
