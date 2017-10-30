@@ -22,7 +22,7 @@
 				<li data-level="3"><a href="#panneaux">Panneaux</a></li>
 				<li data-level="4"><a href="#groupe-de-champs">Groupe de champs</a></li>
 				<li data-level="5"><a href="#champs">Champs</a></li>
-				<li data-level="4"><a href="#bloc-d-info">Bloc d'info</a></li>
+				<li data-level="4"><a href="#bloc-d-infos">Bloc d'infos</a></li>
 				<li data-level="5"><a href="#chapitre">Chapitre</a></li>
 				<li data-level="6"><a href="#section">Section</a></li>
 				<li data-level="3"><a href="#notes-de-bas-de-page">Notes de bas de page</a></li>
@@ -30,12 +30,10 @@
 				<li data-level="2"><a href="#regles-metier">Règles métier</a></li>
 				<li data-level="2"><a href="#profils">Profils</a></li>
 				<li data-level="2"><a href="#enregistrement-du-simulateur">Enregistrement du simulateur</a></li>
+				<li data-level="2"><a href="#deploiement-sur-des-serveurs-frontaux">Déploiement sur des serveurs frontaux</a></li>
 			</ul>
 		</div>
 		<div class="span9">
-			<div class="alert alert-danger" role="alert">
-ATTENTION: Ce document, en cours d'élaboration, est très incomplet.
-</div>
 			<h1 id="simulateurs">
 				Simulateurs
 			</h1>
@@ -58,7 +56,7 @@ ATTENTION: Ce document, en cours d'élaboration, est très incomplet.
 			<p>Pour les données de référence, il faut se poser la question de la source de données. Dispose-t-on d’une API (web service) interne ou externe ou d’une base de données pour retrouver ces données ?</p>
 			<p>Si oui, il sera possible de paramétrer cette API ou cette base de données dans G6K pour pouvoir y accéder.</p>
 			<p>Dans le cas contraire il faudra créer une source de données (base de données) interne dans G6K. A noter que les valeurs simples (tel que le montant du RSA) peuvent être définies en constante dans le simulateur, évitant ainsi la création d’une source de données. En revanche, les structures de données complexes (tel qu’un barème) nécessitent la création d’une source de données interne.</p>
-			<p>Ensuite, il est conseillé d’identifier tous les éléments d’une page, les nommer, les labeliser :</p>
+			<p>Ensuite, il est conseillé d’identifier tous les éléments d’une page, les nommer, les labelliser :</p>
 			<ol>
 				<li>Donner un nom au simulateur, celui qui figurera dans l’url</li>
 				<li>Donner un titre au simulateur. Ce titre apparaitra sur chaque page en dessous du fil d’Ariane de navigation sur le site</li>
@@ -145,7 +143,7 @@ G6K constitue un fil d'Ariane de navigation où l'avant dernier élément est co
 				, le bouton 
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-save.png') }}" alt="Enregistrer" />
 				apparait en haut à droite de la page.
-Ce bouton permet d'envoyer les informations saisies ou modifiées au serveur à tout moment, parceque le bouton « Valider » ne fait que garder les informations dans la mémoire de votre ordinateur.
+Ce bouton permet d'envoyer les informations saisies ou modifiées au serveur à tout moment, parce que le bouton « Valider » ne fait que garder les informations dans la mémoire de votre ordinateur.
 			</p>
 			<h2 id="sources-de-donnees-utilisees">
 				Sources de données utilisées
@@ -189,7 +187,7 @@ Vous pouvez également composer une expression auquel cas vous devrez définir u
 Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</li>
 				<li>« Filtre » : Conditions portant sur les champs/colonnes permettant de ne garder que les lignes du résultat de la requête respectant ces conditions.</li>
 				<li>« Trié par » : Tri par ordre croissant ou décroissant sur les champs/colonnes sélectionnées. Pour entrer une colonne, faire comme en&nbsp;3., puis sélectionnez l'ordre de tri (croissant ou décroissant).</li>
-				<li>« Nombre de résultats » : Parmi toutes les « lignes » de résultats retournées par la requête, indiquer le nombre de lignes qui doit être conservées. Mettre 0 si toutes les lignes doivent être conservées.</li>
+				<li>« Nombre de résultats » : Parmi toutes les « lignes » de résultats retournées par la requête, indiquer le nombre de lignes qui doivent être conservées. Mettre 0 si toutes les lignes doivent être conservées.</li>
 				<li>« à partir de » : Parmi toutes les « lignes » de résultats retournées par la requête, indiquer le numéro de la première ligne qui doit être prise en considération pour le traitement de la requête. Le numéro de la première ligne est 0, 1 la deuxième et ainsi de suite.</li>
 				<li>
 					« Format des données retournées » : 
@@ -239,7 +237,7 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-datasource-display-simple.png') }}" alt="" />
 			</p>
-			<p>Cette requête retournera un tableau de paires « 'taux'/valeur du taux ». Le chemin d'accés spécifié (0/taux) sélectionnera la première ligne du tableau et la valeur coorespondant à 'taux'. Nous verrons plus loin comment déclarer une donnée pour stocker la valeur du taux.</p>
+			<p>Cette requête retournera un tableau de paires « 'taux'/valeur du taux ». Le chemin d'accès spécifié (0/taux) sélectionnera la première ligne du tableau et la valeur correspondant à 'taux'. Nous verrons plus loin comment déclarer une donnée pour stocker la valeur du taux.</p>
 			<h3 id="requete-complexe">
 				Requête complexe
 			</h3>
@@ -284,11 +282,12 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 			<h2 id="donnees">
 				Données
 			</h2>
-			<p>Les données permettent stocker des valeurs quel que soit leurs provenances (saisies par l'utilisateur, source de données, élément ou résultat de calculs). Elles peuvent être regrouper en groupes de données, ce qui permet de les disposer dans les rangées d’un tableau (Cf. disposition « grille » d’un groupe de champs, plus loin dans ce document).</p>
-			<p>Pour ajouter une donnée ou un groupe de données, cliquez sur « Ajouter » de la barre de titre « Données » puis sur « Ajouter une donnée » ou « Ajouter un groupe de données » selon le cas.</p>
+			<p>Les données permettent de stocker des valeurs quel que soit leurs provenances (saisies par l'utilisateur, source de données, élément ou résultat de calculs). Elles peuvent être regroupées en groupes de données, ce qui permet de les disposer dans les rangées d’un tableau (Cf. disposition « grille » d’un groupe de champs, plus loin dans ce document).</p>
+			<p>Pour ajouter une donnée ou un groupe de données, cliquez sur « Ajouter » de la barre de titre « Données » :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-data-add-button.png') }}" alt="" />
 			</p>
+			<p>puis sur « Ajouter une donnée » ou « Ajouter un groupe de données » selon le cas :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-data-add-menu.png') }}" alt="" />
 			</p>
@@ -310,7 +309,7 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 			<ol>
 				<li>« Nom » : Nom de la donnée sans espaces ni caractères spéciaux ou accentués.</li>
 				<li>« Libellé » : Titre de la donnée que l’on pourra sélectionner lors de la définition des champs des étapes, des règles métier ou des profils.</li>
-				<li>« Type » : A choisir en fonction du format de donnée souhaité.</li>
+				<li>« Type » : Type de la donnée. Cf. Type de données ci-dessous.</li>
 			</ol>
 			<p><strong>Type de données</strong></p>
 			<table class="table table-condensed table-striped table-bordered">
@@ -323,7 +322,7 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 				<tbody>
 					<tr>
 						<td>date</td>
-						<td>date au format défini dans es options du simulateur. Cf. supra. Si la donnée est associée a un champ de saisie, un selecteur de date sera proposé à l'utilisateur.</td>
+						<td>date au format défini dans les options du simulateur. Cf. supra. Si la donnée est associée à un champ de saisie, un sélecteur de date sera proposé à l'utilisateur.</td>
 					</tr>
 					<tr>
 						<td>jour</td>
@@ -339,7 +338,7 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 					</tr>
 					<tr>
 						<td>booléen</td>
-						<td>Valeur boolénne (0/1). Si la donnée est associée a un champ de saisie, une cache à cocher sera proposée à l'utilisateur.</td>
+						<td>Valeur booléenne (0/1). Si la donnée est associée à un champ de saisie, une cache à cocher sera proposée à l'utilisateur.</td>
 					</tr>
 					<tr>
 						<td>entier</td>
@@ -383,11 +382,11 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 					</tr>
 					<tr>
 						<td>département</td>
-						<td>Code de département. Si la donnée est associée a un champ de saisie, l'utilisateur choisit dans une liste déroulante.</td>
+						<td>Code de département. Si la donnée est associée à un champ de saisie, l'utilisateur choisit dans une liste déroulante.</td>
 					</tr>
 					<tr>
 						<td>région</td>
-						<td>Code de région. Si la donnée est associée a un champ de saisie, l'utilisateur choisit dans une liste déroulante.</td>
+						<td>Code de région. Si la donnée est associée à un champ de saisie, l'utilisateur choisit dans une liste déroulante.</td>
 					</tr>
 					<tr>
 						<td>pays</td>
@@ -408,12 +407,35 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 				<li>« Mémoriser » : Garder en mémoire (cookie de l’utilisateur) la valeur afin que l’utilisateur n’ait pas à la ressaisir (Cf. attribut « Mémo » du simulateur)</li>
 			</ol>
 			<p>Donnez une description de la donnée dans le champ « Description ». Cette description pourra être affichée dans une bulle d'aide, à la demande de l'utilisateur.</p>
+			<p>Dans le cas des données de type « choix », vous devez indiquer comment alimenter la liste de choix, pour cela un panneau « Liste de choix » s'affiche en bas du formulaire de saisie :</p>
 			<p>
-				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-data-source-add.png') }}" alt="" />
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-data-choices.png') }}" alt="" />
 			</p>
+			<p>La liste est soit statique, c'est-à-dire que ses éléments figurent in extenso dans le fichier de définition du simulateur, soit dynamique, c'est-à-dire qu'elle est alimentée par une source de données</p>
+			<p>Pour créer une liste statique, cliquez sur le bouton « Ajouter un choix » du panneau « Liste de choix » :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-data-choice-add.png') }}" alt="" />
 			</p>
+			<p><strong>Attributs :</strong></p>
+			<ol>
+				<li>« Valeur » : Valeur attribuée à la donnée si cet élément de liste est sélectionné.</li>
+				<li>« Libellé » : Texte de l'élément apparaissant dans la liste.</li>
+			</ol>
+			<p>Ajouter des choix autant de fois que nécessaire pour constituer la liste.</p>
+			<p>Pour créer une liste dynamique, cliquez sur le bouton « Ajouter une source de données » :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-data-source-add.png') }}" alt="" />
+			</p>
+			<p><strong>Attributs :</strong></p>
+			<ol>
+				<li>« Source » : Source de la donnée devant alimenter la liste.</li>
+				<li>« Champ de la source à utiliser comme valeur de la donnée » : Champ contenant la valeur attribuée à la donnée si cet élément de liste est sélectionné.</li>
+				<li>« Champ de la source à utiliser comme libellé dans la liste de choix » : Champ contenant le texte de l'élément apparaissant dans la liste.</li>
+			</ol>
+			<p><strong>Attribut optionnel :</strong></p>
+			<ol>
+				<li>« Champ de la source à utiliser comme ID » : Champ contenant l'ID de l'élément.</li>
+			</ol>
 			<h2 id="etapes">
 				Étapes
 			</h2>
@@ -423,30 +445,68 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 			<p>Les groupes de champs sont composés de champs qui peuvent être disposés de trois manières différentes :</p>
 			<ul>
 				<li>« Classique » : Les champs et leurs étiquettes sont affichés de façon classique, c'est-à-dire les uns en dessous des autres.</li>
-				<li>« Grille » : Les champs sont disposés par rangées sous forme de tableaux. Les données associées au champs d'une rangée doivent être regroupés dans des « groupes de données » (Cf. infra). Les étiquettes de champ sont ignorées.</li>
+				<li>« Grille » : Les champs sont disposés par rangées sous forme de tableaux. Les données associées aux champs d'une rangée doivent être regroupées dans des « groupes de données » (Cf. infra). Les étiquettes de champ sont ignorées.</li>
 				<li>« En ligne » : Les champs et leurs étiquettes sont disposés les uns à la suite des autres de façon à former une phrase. </li>
 			</ul>
+			<p>Ces éléments sont disposés de la façon suivante dans la page d'une étape :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-step-page.png') }}" alt="" />
+			</p>
+			<p>Pour ajouter une étape, cliquez sur le bouton « Ajouter » de la barre de titre du panneau « Etapes » :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-step-add-button.png') }}" alt="" />
 			</p>
+			<p>Le formulaire de saisie d'une étape s'affiche :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-step-add.png') }}" alt="" />
 			</p>
 			<p><strong>Attributs :</strong></p>
 			<ol>
-				<li>« Nom » : Nom de l’étape sans espaces ni caractères spéciaux ou accentués.</li>
-				<li>« Libellé de l’étape » : Titre de l’étape qui sera affiché.</li>
-				<li>« Gabarit d’affichage de l’étape » :</li>
+				<li>« Nom de l'étape » : Nom de l’étape sans espaces ni caractères spéciaux ou accentués.</li>
+				<li>« Libellé de l’étape » : Titre de l’étape qui sera affiché dans le fil d'Ariane d'enchaînement des étapes.</li>
+				<li>« Gabarit d’affichage de l’étape » : Nom du gabarit utilisé par G6K pour afficher la page de l'étape. Pour plus d'information, consulter la page : <a href="{{ path('eureka_g6k_admin_documentation', {'document': 'views-management' }) }}">Gestion des vues</a></li>
 			</ol>
 			<p><strong>Attributs optionnels :</strong></p>
 			<ol>
-				<li>« Sortie » :</li>
-				<li>« UI interactif » :</li>
+				<li>« Sortie » : « Normal », « PDF en ligne », « PDF téléchargeable » ou « html ». Cf. la description de ces valeurs ci-dessous.</li>
+				<li>« UI interactif » : Si cette option est cochée, le moteur de simulation utilisera le Javascript pour donner de l’interactivité à la simulation pour cette étape (recommandé).</li>
 			</ol>
+			<table class="table table-condensed table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Sortie</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>« Normal »</td>
+						<td>L'étape est affichée normalement.</td>
+					</tr>
+					<tr>
+						<td>« PDF en ligne »</td>
+						<td>G6K affiche un PDF du rendu de la page générée.</td>
+					</tr>
+					<tr>
+						<td>« PDF téléchargeable »</td>
+						<td>G6K génère un fichier PDF du rendu de la page pour être téléchargé.</td>
+					</tr>
+					<tr>
+						<td>« html »</td>
+						<td>Réservé. Non implémenté</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Décrivez l'étape dans le champ « Description ». Cette description s'affiche dans la zone <span class="bs-docs-number-circle">1</span> de la page.</p>
 			<h3 id="panneaux">
 				Panneaux
 			</h3>
 			<p>Les panneaux composent les étapes et sont eux-mêmes constitués de groupes de champs. S'il y plusieurs panneaux, ils seront présentés sous forme d’onglets :</p>
+			<p>Pour ajouter un panneau, cliquez sur le bouton « Ajouter » de la barre de titre du panneau « Etapes » :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-step-add-menu.png') }}" alt="" />
+			</p>
+			<p>puis sur « Ajouter un panneau » du menu :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-panel-add.png') }}" alt="" />
 			</p>
@@ -458,26 +518,87 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 				<strong><em>Attribut optionnel :</em></strong>
 			</p>
 			<ol>
-				<li>« Libellé » : Titre du panneau</li>
+				<li>« Libellé » : Titre du panneau. Il s'affiche dans la zone <span class="bs-docs-number-circle">2</span> de la page.</li>
 			</ol>
 			<h4 id="groupe-de-champs">
 				Groupe de champs
 			</h4>
+			<p>Le groupe de champs permet de regrouper des champs de même nature (logique ou thématique) faisant ressortir ainsi la structuration des informations demandées.</p>
+			<p>Pour ajouter un groupe de champs, cliquez sur le bouton « Ajouter » de la barre de titre du panneau « Panneau » :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-panel-add-menu.png') }}" alt="" />
+			</p>
+			<p>puis sur « Ajouter un groupe de champs » du menu :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-fieldset-add.png') }}" alt="" />
 			</p>
 			<p><strong>Attributs :</strong></p>
 			<ol>
-				<li>« Disposition » : Classique, grille ou en ligne.</li>
-				<li>« Affichage » : En ligne ou pop-in.</li>
+				<li>« Disposition » : « Classique », « Grille » ou « En ligne ».</li>
+				<li>« Affichage » : « En ligne » ou « Pop-in ».</li>
 			</ol>
+			<table class="table table-condensed table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Disposition</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Classique</td>
+						<td>Les éléments du formulaire appartenant au groupe de champs sont disposés de façon classique, c'est-à-dire qu'un champ précédé de son étiquette de champ est placé sur la ligne suivant celle du champ précédent</td>
+					</tr>
+					<tr>
+						<td>Grille</td>
+						<td>Les éléments du formulaire appartenant au groupe de champs sont placés dans un tableau</td>
+					</tr>
+					<tr>
+						<td>En ligne</td>
+						<td>Les éléments du formulaire appartenant au groupe de champs sont disposés en ligne de façon à former une phrase</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="table table-condensed table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Affichage</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>En ligne</td>
+						<td>Les champs du groupe de champs sont affichés "en ligne" dans la page</td>
+					</tr>
+					<tr>
+						<td>Pop-in</td>
+						<td>Les champs du groupe de champs sont affichés dans une fenêtre pop-in modale. Un lien dont le libellé se trouve dans l'attribut « Lien d’activation du Pop-in » permet d'afficher la fenêtre</td>
+					</tr>
+				</tbody>
+			</table>
 			<p><strong>Attribut optionnel :</strong></p>
 			<ol>
-				<li>« Lien d’activation du Pop-in » :</li>
+				<li>« Lien d’activation du Pop-in » : Cet attribut n'est à renseigner que si l'attribut « Affichage » du groupe de champ est « Pop-in ». C'est le texte du lien qui permet d'afficher le pop-in.</li>
 			</ol>
+			<p>Décrivez le groupe de champs dans le champ « Légende ». Cette légende s'affiche dans la zone <span class="bs-docs-number-circle">3</span> de la page.</p>
 			<h5 id="champs">
 				Champs
 			</h5>
+			<p>
+				Le champ est l'élément du formulaire qui permet la saisie ou la restitution d'une donnée. Il prend la forme d'une boite de saisie, d'une boite à liste, d'une case à cocher ou de boutons radio.
+				<br />
+				C'est en principe un élément natif d'un formulaire html mais on peut lui associer un "widget" (sélecteur de date, auto-complétion, ...) pour faciliter la saisie par l'utilisateur.
+				<br />
+				Il est précédé par une étiquette de champ sauf s'il est placé dans la cellule d'un tableau.
+				<br />
+				Il peut être obligatoire ou facultatif.
+			</p>
+			<p>Pour ajouter un champ, cliquez sur le bouton « Ajouter un champ » de la barre de titre du panneau du groupe de champ dans lequel vous souhaitez l'ajouter :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-fieldset-add-field-button.png') }}" alt="" />
+			</p>
+			<p>Le formulaire de saisie d'un champ s'affiche :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-field-add.png') }}" alt="" />
 			</p>
@@ -488,81 +609,160 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 			</ol>
 			<p><strong>Attributs optionnels :</strong></p>
 			<ol>
-				<li>« Libellé » : Titre du champ.</li>
+				<li>« Libellé » : Etiquette du champ. Cf. <span class="bs-docs-number-circle">4</span>.</li>
 				<li>« Requis » : Champ requis (Un message d’erreur sera affiché si le champ n’est pas renseigné).</li>
-				<li>« Afficher ‘ :’ après l’étiquette de champ ? » : A choisir en fonction de vos besoins.</li>
-				<li>« Utiliser la description de données comme aide ? » : A choisir en fonction de vos besoins.</li>
-				<li>« Invite » :</li>
-				<li>« Saut de ligne avant le champ ? » : A choisir en fonction de vos besoins.</li>
-				<li>« Requis si visible » : Lorsque le champ sera visible on peut décider du fait qu’il soit requis.</li>
-				<li>« Placez le champ sous l’étiquette de champ ? » : A choisir en fonction de vos besoins.</li>
-				<li>« Mettre en évidence l’étiquette de champ ? » : A choisir en fonction de vos besoins.</li>
+				<li>« Afficher ‘:’ après l’étiquette de champ ? » : Si cette case est cochée, les ':' seront affichés après l'étiquette.</li>
+				<li>« Utiliser la description de données comme aide ? » : Si cette case est cochée, un point d'interrogation sera affiché après le champ (Cf. <span class="bs-docs-number-circle">6</span>). Si l'utilise clique sur ce point d'interrogation, la description de la donnée est affichée sous le champ en tant que texte d'aide (Cf. <span class="bs-docs-number-circle">8</span>).</li>
+				<li>« Invite » : Texte à afficher dans e champ de saisie pour lui indiquer le format de saisie ou ce qu'il faut saisir ou sélectionner.</li>
+				<li>« Saut de ligne avant le champ ? » : Si cette case est cochée, le champ s'affichera sur une nouvelle ligne.</li>
+				<li>« Requis si visible » : Si cette case est cochée, le champ sera rendu obligatoire si et seulement si il n'est pas caché.</li>
+				<li>« Placez le champ sous l’étiquette de champ ? » : Si cette case est cochée, le champ s'affichera en dessous de son étiquette et non à sa droite.</li>
+				<li>« Mettre en évidence l’étiquette de champ ? » : Si cette case est cochée, l'étiquette de champ sera affichée en caractères gras.</li>
 				<li>« Afficher les choix avec les boutons radio ? » : Ne pas utiliser pour les longues listes de choix.</li>
-				<li>« Explication » : A choisir en fonction de vos besoins.</li>
+				<li>« Explication » : Texte expliquant le mode de calcul du champ.</li>
 				<li>
 					« Widget » : A choisir en fonction de vos besoins : 
 					<ul>
 						<li>« Boite à liste conforme RGAA » : Boîte à liste conforme au Référentiel Général d’Accessibilité pour les Administration.</li>
 						<li>« Boîte à liste avec auto-complétion » : Lors de la saisie l’auto-complétion se fait automatiquement, cela permet à l’utilisateur de trouver l’élément qu’il recherche.</li>
 						<li>« Code postal obtenu par auto-complétion sur le nom de la commune ou son code postal » : Permet à l’utilisateur de profiter de l’auto-complétion concernant le nom de la commune ou son code postal.</li>
-						<li>«  Code Insee obtenu par auto-complétion sur le nom de la commune ou son code postal » : Permet à l’utilisateur de profiter de l’auto-complétion concernant le nom de la commune ou son code postal.</li>
+						<li>« Code Insee obtenu par auto-complétion sur le nom de la commune ou son code postal » : Permet à l’utilisateur de profiter de l’auto-complétion concernant le nom de la commune ou son code postal.</li>
 						<li>« Code Insee obtenu à partir d'une carte de France » : Une carte apparaît et laisse le choix à l’utilisateur de se géolocaliser ou non.</li>
 						<li>« Sélecteur de date conforme RGAA » : Permet à l’utilisateur de sélectionner une date.</li>
-						<li>« Éditeur en place de champ de formulaire » :</li>
+						<li>« Éditeur en place de champ de formulaire » : Permet de placer un champ de saisie au milieu d'un texte.</li>
 					</ul>
 				</li>
 			</ol>
-			<h4 id="bloc-d-info">
-				Bloc d'info
+			<h4 id="bloc-d-infos">
+				Bloc d'infos
 			</h4>
+			<p>
+				Le bloc d'infos est un élément de la page de simulation de même niveau que le groupe de champs mais ne contient aucun champ de saisie ou de restitution.
+				<br />
+				Il contient des informations textuelles qui peuvent être utiles à l'utilisateur dans le déroulement de la simulation.
+				<br />
+				Il peut être contextualisé en le montrant/cachant totalement ou partiellement à l'aide des actions des règles métier en fonction de certaines conditions.
+			</p>
+			<p>Les blocs d'infos sont composés d'un ou plusieurs chapitres eux-mêmes composés d'une ou plusieurs sections.</p>
+			<p>Pour ajouter un bloc d'infos, cliquez sur le bouton « Ajouter » de la barre de titre du panneau « Panneau » :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-panel-add-menu.png') }}" alt="" />
+			</p>
+			<p>puis sur « Ajouter un bloc d'info » du menu :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-blockinfo-add.png') }}" alt="" />
 			</p>
 			<p><strong>Attributs optionnels :</strong></p>
+			<ol>
+				<li>« Nom » : Nom du bloc d'infos sans espaces ni caractères spéciaux ou accentués.</li>
+				<li>« Libellé » : Libellé du bloc d'infos. Il s'affiche dans la zone <span class="bs-docs-number-circle">9</span> de la page.</li>
+			</ol>
 			<h5 id="chapitre">
 				Chapitre
 			</h5>
 			<p>
+				Le chapitre est une sous-partie du bloc d'infos. Il est composé de sections.
+				<br />
+				On peut le rendre pliable / dépliable dans le cas d'un bloc d'infos contenant de nombreux chapitres pour faciliter la lecture de la page.
+				<br />
+				On peut également lui associer une icône pour permettre de le distinguer visuellement des autres chapitres.
+			</p>
+			<p>Pour ajouter un chapitre, cliquez sur le bouton « Ajouter un chapitre » de la barre de titre du panneau « Bloc d'infos » :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-blockinfo-add-chapter-button.png') }}" alt="" />
+			</p>
+			<p>Le formulaire de saisie d'un chapitre s'affiche :</p>
+			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-chapter-add.png') }}" alt="" />
 			</p>
 			<p><strong>Attributs optionnels :</strong></p>
+			<ol>
+				<li>« Nom » : Nom du chapitre sans espaces ni caractères spéciaux ou accentués.</li>
+				<li>« Libellé » : Titre du chapitre. Il s'affiche dans la zone <span class="bs-docs-number-circle">10</span> de la page.</li>
+				<li>« Icône » : URL absolue ou relative d'une image.</li>
+				<li>« Permettre Plier / Déplier » : Si cette case est cochée, seule la barre de titre du panneau du chapitre est affichée. En cliquant sur la barre de titre, le panneau se déplie pour en montrer le contenu.</li>
+			</ol>
 			<h6 id="section">
 				Section
 			</h6>
 			<p>
+				La section est une sous-division d'un chapitre. C'est dans les sections que s'inscrivent les différents textes d'un bloc d'infos.
+				<br />
+				Le texte d'une section peut être annoté.
+			</p>
+			<p>Pour ajouter une section, cliquez sur le bouton « Ajouter une section » de la barre de titre du panneau « Chapitre » :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-chapter-add-section-button.png') }}" alt="" />
+			</p>
+			<p>Le formulaire de saisie d'une section s'affiche :</p>
+			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-section-add.png') }}" alt="" />
 			</p>
 			<p><strong>Attributs optionnels :</strong></p>
+			<ol>
+				<li>« Nom » : Nom de la section sans espaces ni caractères spéciaux ou accentués.</li>
+				<li>« Libellé » : Libellé de la section. Il s'affiche dans la zone <span class="bs-docs-number-circle">11</span> de la page.</li>
+			</ol>
+			<p>
+				Entrez le texte enrichi de la section dans le champ « Contenu » du formulaire.
+				<br />
+				Ce contenu s'affichera dans la zone <span class="bs-docs-number-circle">12</span> de la page.
+			</p>
+			<p>
+				Optionnellement, des annotations du texte peuvent être ajoutées dans le champ « Annotations ».
+				<br />
+				Ces annotations s'afficheront dans la zone <span class="bs-docs-number-circle">13</span> de la page.
+			</p>
 			<h3 id="notes-de-bas-de-page">
 				Notes de bas de page
 			</h3>
+			<p>Une note de bas de page est une note contextualisée (pouvant être montrée ou cachée par les règles métier) se situant dans la partie basse du formulaire (zone <span class="bs-docs-number-circle">14</span> de la page) d'une étape de simulation.</p>
+			<p>Les notes de bas de page peuvent être placées, à votre convenance, avant ou après les boutons d'action.</p>
+			<p>Pour ajouter des notes de bas de page, cliquez sur le bouton « Ajouter » de la barre de titre du panneau « Etapes » :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-step-add-menu.png') }}" alt="" />
+			</p>
+			<p>puis sur « Ajouter des notes de bas de page » du menu :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-footnotes-add.png') }}" alt="" />
 			</p>
+			<p>Choisissez leurs emplacements (avant ou après les boutons d'action) puis validez.</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-footnotes-display.png') }}" alt="" />
 			</p>
+			<p>Ensuite, cliquez sur le bouton « Ajouter une note de bas de page » de la barre de titre:</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-footnote-add.png') }}" alt="" />
 			</p>
+			<p>Saisissez la note puis validez.</p>
+			<p>Le nombre de notes que vous pouvez ajouter n'est pas limité.</p>
 			<h3 id="boutons-d’actions">
 				Boutons d’actions
 			</h3>
-			<p>Les boutons d’actions permettent par exemple de passer d’une étape à l’autre ou de réinitialiser un formulaire.</p>
+			<p>
+				Les boutons d’actions permettent d'enchainer les étapes, de réinitialiser un formulaire, de lancer une nouvelle simulation ou d'ouvrir une page externe au simulateur.
+				<br />
+				Ils s'afficheront dans la zone <span class="bs-docs-number-circle">15</span> de la page.
+			</p>
+			<p>Pour ajouter un bouton d'action, cliquez sur le bouton « Ajouter un bouton d'action » de la barre de titre du panneau « Boutons d'action » :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-action-add-button.png') }}" alt="" />
+			</p>
+			<p>Le formulaire de saisie des attributs du bouton s'affiche :</p>
 			<p>
 				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-action-add.png') }}" alt="" />
 			</p>
 			<p><strong>Attributs :</strong></p>
 			<ol>
-				<li>« Nom » : Donnée qui sera affiché pour les utilisateurs.</li>
-				<li>« Libellé » : Saisie par l’utilisateur ou restitution à l’utilisateur.</li>
-				<li>« Action » : Soumettre le formulaire et passage à l’étape définie par l’attribut « Vers » ou réinitialiser.</li>
-				<li>« Vers » : A choisir en fonction de vos besoins.</li>
+				<li>« Nom » : Nom du bouton sans espaces ni caractères spéciaux ou accentués.</li>
+				<li>« Libellé » : Libellé du bouton.</li>
+				<li>« Action » : « Soumettre » si on souhaite passer à l’étape définie par l’attribut « Vers », « Réinitialiser » pour réinitialiser (effacer les données) du formulaire.</li>
+				<li>« Vers » : Si l'action choisie est « Soumettre », cet attribut définit l'enchaînement (étape suivante, précédente, courante ou étape spécifique), une nouvelle simulation ou l'ouverture du page externe.</li>
 			</ol>
 			<p><strong>Attributs optionnels :</strong></p>
 			<ol>
-				<li>« URI / étape » : Titre du champ.</li>
-				<li>« Classe » : Niveau d’importance du bouton « Principale » le bouton sera mis en avant visuellement et « Secondaire » le bouton ne sera pas mis en avant visuellement.</li>
+				<li>« URI / étape » : Si l'attribut « Vers » contient « Page externe », alors cet attribut contient l'URI de la page. Si l'attribut « Vers » contient « Aller à l'étape », alors cet attribut contient le numéro de l'étape cible.</li>
+				<li>« Classe » : Niveau d’importance du bouton : « Principale » le bouton sera mis en avant visuellement, « Secondaire » le bouton ne sera pas mis en avant visuellement.</li>
 			</ol>
 			<h2 id="regles-metier">
 				Règles métier
@@ -603,7 +803,7 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 				<li>« Libellé » : Libellé du profil.</li>
 				<li>« Données » / « Ajouter » : Ajout des données à pré remplir.</li>
 				<li>« Donnée » : Choix de la donnée que l’on souhaite pré remplir.</li>
-				<li>« Valeur » : Valeur pré rempli.</li>
+				<li>« Valeur » : Valeur pré remplie.</li>
 			</ol>
 			<h2 id="enregistrement-du-simulateur">
 				Enregistrement du simulateur
@@ -614,6 +814,52 @@ Pour supprimer une colonne, cliquez sur le 'x' à gauche du nom de la colonne.</
 				en haut à droite de la page pour enregistrer votre travail.
 			</p>
 			<p>A noter que G6K, enregistre une version de « travail » qu'il sera nécessaire de « Publier » pour la mise en ligne.</p>
+			<h2 id="deploiement-sur-des-serveurs-frontaux">
+				Déploiement sur des serveurs frontaux
+			</h2>
+			<p>Si, pour des raisons de sécurité, le module d'administration (back-office) est situé sur un serveur différent de ceux sur lesquels les visiteurs effectuent des simulations, vous allez devoir déployer vos simulateurs sur ces serveurs frontaux depuis le serveur de back-office.</p>
+			<p>Pour cela, G6K fournit une fonctionnalité de déploiement permettant de copier chaque simulateur du back-office vers les frontaux.</p>
+			<p>Pour activer cette fonctionnalité, l'administrateur système doit ajouter une entrée « deployment » dans le fichier parameters.yml de l'instance G6K installée sur le serveur de back-office :</p>
+			<p>
+				<em><strong>Exemple de paramétrage du déploiement :</strong></em>
+			</p>
+			<pre class="prettyprint">
+<em># src/EUREKA/G6KBundle/Resources/config/parameters.yml</em> deployment: localhost: cp -f {local.rootdir}/{local.file} /var/www/html/simulator/{remote.dir}/ remotehost: rsync -a {local.rootdir}/{local.file} user@remoteserver:/var/www/html/simulator/{remote.file}
+</pre>
+			<p>Dans cet exemple, l'administrateur du système a déclaré deux serveurs frontaux de noms virtuels « localhost » et « remotehost ».</p>
+			<p>En face de chaque nom virtuel, se trouve la commande que G6K doit lancer pour copier les fichiers du simulateur via l'utilisateur du serveur HTTP. Bien sûr, cet utilisateur devra disposer des droits d'exécution de ces commandes.</p>
+			<p>Chaque commande est lancée autant fois qu'il y de fichiers composant le simulateur déployé. Ces fichiers sont :</p>
+			<ul>
+				<li>Le fichier XML de définition du simulateur.</li>
+				<li>Les fichiers base de données des sources de données interne SQLite utilisés par le simulateur</li>
+				<li>Le fichier DataSources.xml de description des sources de données</li>
+				<li>Les fichiers de styles css du simulateur dans chacune des vues où le simulateur peut être utilisé.</li>
+			</ul>
+			<p>Ainsi pour la commande du serveur virtuel « localhost » de l'exemple, supposons que le back-office est installé dans le répertoire « /var/www/html/g6k », que le frontal est installé dans le répertoire « /var/www/html/simulator » et que l'on souhaite déployer un simulateur nommé « demo » qui accède a une source de données interne « demo.db » et qu'il est visualisable dans les vues « Demo » et « Default ». La commande sera lancée cinq fois par G6K :</p>
+			<p><code>cp -f /var/www/html/g6k/src/EUREKA/G6KBundle/Resources/data/simulators/demo.xml /var/www/html/simulator/src/EUREKA/G6KBundle/Resources/data/simulators/</code></p>
+			<p><code>cp -f /var/www/html/g6k/src/EUREKA/G6KBundle/Resources/data/databases/demo.db /var/www/html/simulator/src/EUREKA/G6KBundle/Resources/data/databases/</code></p>
+			<p><code>cp -f /var/www/html/g6k/src/EUREKA/G6KBundle/Resources/data/databases/DataSources.xml /var/www/html/simulator/src/EUREKA/G6KBundle/Resources/data/databases/</code></p>
+			<p><code>cp -f /var/www/html/g6k/src/EUREKA/G6KBundle/Resources/public/Demo/demo.css /var/www/html/simulator/src/EUREKA/G6KBundle/Resources/public/Demo/</code></p>
+			<p><code>cp -f /var/www/html/g6k/src/EUREKA/G6KBundle/Resources/public/Default/demo.css /var/www/html/simulator/src/EUREKA/G6KBundle/Resources/public/Default/</code></p>
+			<p>après avoir remplacé :</p>
+			<ul>
+				<li>{local.rootdir} par "/var/www/html/g6k/",</li>
+				<li>{local.file} successivement par "src/EUREKA/G6KBundle/Resources/data/simulators/demo.xml", "src/EUREKA/G6KBundle/Resources/data/databases/demo.db", "src/EUREKA/G6KBundle/Resources/data/databases/DataSources.xml", "src/EUREKA/G6KBundle/Resources/public/Demo/demo.css", "src/EUREKA/G6KBundle/Resources/public/Default/demo.css"</li>
+				<li>{remote.dir} successivement par "src/EUREKA/G6KBundle/Resources/data/simulators", "src/EUREKA/G6KBundle/Resources/data/databases", "src/EUREKA/G6KBundle/Resources/data/databases", "src/EUREKA/G6KBundle/Resources/public/Demo", "src/EUREKA/G6KBundle/Resources/public/Default"</li>
+			</ul>
+			<p>{local.rootdir}, {local.file}, {remote.dir} et {remote.file} sont des paramètres que l'administrateur du système doit utiliser pour configurer les commandes :</p>
+			<ul>
+				<li>{local.rootdir} : Répertoire d'installation du back-office G6K</li>
+				<li>{local.file} : Fichier à copier relativement à {local.rootdir}</li>
+				<li>{remote.dir} : Répertoire du fichier à copier relativement au répertoire d'installation de G6K sur le serveur frontal.</li>
+				<li>{remote.file} : Fichier à copier relativement au répertoire d'installation de G6K sur le serveur frontal.</li>
+			</ul>
+			<p>Pour déployer un simulateur, cliquez sur le bouton « Déployer » de la barre de titre du panneau du simulateur, puis confirmer sur la boite de dialogue qui s'affiche :</p>
+			<p>
+				<img src="{{ asset('bundles/eurekag6k/admin/images/documentation/fr/simulators-management-deployment-confirm.png') }}" alt="" />
+			</p>
+			<p>Un journal du déploiement s'affiche. Si une ligne du journal fait apparaitre une erreur (en rouge), signalez là à l'administrateur du système.</p>
+			<p>Vous devez disposer du rôle « Manager » pour déployer un simulateur.</p>
 		</div>
 	</div>
 </div>

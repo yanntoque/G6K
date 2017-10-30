@@ -1,5 +1,4 @@
-<?php
-/*
+{#
 The MIT License (MIT)
 
 Copyright (c) 2015 Jacques Archimède
@@ -21,46 +20,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+#}
 
-namespace EUREKA\G6KBundle\Entity;
+{% extends "EUREKAG6KBundle:admin/layout:pagelayout.html.twig" %}
 
-class Constraint {
+{% block content %}
+<h2>{{ 'Simulators management'|trans }}</h2>
 
-	private $id = 0;
-	private $constraint = ""; // expression = contrôle du contenu
-	private $message = ""; // Message d'erreur si la contrainte n'est pas respectée
-	
-	public function __construct($id, $constraint, $message) {
-		$this->id = $id;
-		$this->constraint = $constraint;
-		$this->message = $message;
-	}
-	
-	public function getId() {
-		return $this->id;
-	}
-	
-	public function setId($id) {
-		$this->id = $id;
-	}
-	
-	public function getConstraint() {
-		return $this->constraint;
-	}
-	
-	public function setConstraint($constraint) {
-		$this->constraint = $constraint;
-	}
-	
-	public function getMessage() {
-		return $this->message;
-	}
-	
-	public function setMessage($message) {
-		$this->message = $message;
-	}
+<a class="pull-right" href="{{ path('eureka_g6k_admin_simulator', {'simulator': simulator.name}) }}">{{ 'Return to the definition of the simulator « %simulator% »'|trans({'%simulator%': simulator.name}) }}</a>
+<h3>{{ 'Deployment of the « %simulator% » simulator'|trans({'%simulator%': simulator.name}) }}</h3>
 
-}
+{% for l in log %}
+<p>{{ l|jscode }}</p>
+{% endfor %}
 
-?>
+<a href="{{ path('eureka_g6k_admin_simulator', {'simulator': simulator.name}) }}">{{ 'Return to the definition of the simulator « %simulator% »'|trans({'%simulator%': simulator.name}) }}</a>
+
+{% endblock %}
