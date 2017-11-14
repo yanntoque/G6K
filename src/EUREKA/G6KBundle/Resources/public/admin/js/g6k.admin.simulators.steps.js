@@ -573,23 +573,23 @@ THE SOFTWARE.
 			container = $("#collapsesteps");
 		}
 		container.find('button.edit-step').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editStep($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-step').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteStep($($(this).attr('data-parent')));
 		});
 		container.find('button.add-action-button').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addActionButton($($(this).attr('data-parent')));
 		});
 		container.find('button.add-footnotes, a.add-footnotes').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addFootNotes($($(this).attr('data-parent')));
 		});
 		container.find('button.add-panel, a.add-panel').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addPanel($($(this).attr('data-parent')));
 		});
 	}
@@ -969,15 +969,15 @@ THE SOFTWARE.
 			container = $("#steps");
 		}
 		container.find('button.edit-footnotes').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editFootNotes($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-footnotes').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteFootNotes($($(this).attr('data-parent')));
 		});
 		container.find('button.add-footnote').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addFootNote($($(this).attr('data-parent')));
 		});
 	}
@@ -1183,11 +1183,11 @@ THE SOFTWARE.
 			container = $("#steps");
 		}
 		container.find('button.edit-footnote').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editFootNote($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-footnote').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteFootNote($($(this).attr('data-parent')));
 		});
 	}
@@ -1467,11 +1467,11 @@ THE SOFTWARE.
 			container = $("#steps");
 		}
 		container.find('button.edit-action-button').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editActionButton($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-action-button').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteActionButton($($(this).attr('data-parent')));
 		});
 	}
@@ -1836,19 +1836,19 @@ THE SOFTWARE.
 			container = $("#steps .panels-panel");
 		}
 		container.find('button.edit-panel').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editPanel($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-panel').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deletePanel($($(this).attr('data-parent')));
 		});
 		container.find('button.add-fieldset, a.add-fieldset').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addFieldSet($($(this).attr('data-parent')));
 		});
 		container.find('button.add-blockinfo, a.add-blockinfo').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addBlockInfo($($(this).attr('data-parent')));
 		});
 	}
@@ -1909,6 +1909,7 @@ THE SOFTWARE.
 			if ($(this).hasClass('validate-edit-panel')) {
 				panelContainer.replaceWith(newPanelPanel.find('.panel-container'));
 				if (panel.label != oldLabel) {
+					panelPanelContainer.find('> div > .panel-heading > h4 a').text(' ' + Translator.trans('Panel') + ' #' + panel.id + ' : ' + panel.label + ' ');
 					Simulators.changePanelLabelInRules(stepId, panel.id, panel.label);
 				}
 				delete panel['stepId'];
@@ -2179,7 +2180,12 @@ THE SOFTWARE.
 
 	Simulators.drawFieldSetForDisplay = function(fieldset, inClass) {
 		var fieldsetElementId = 'step-' + fieldset.stepId + '-panel-' + fieldset.panelId + '-fieldset-' + fieldset.id;
-		var fieldsetPanelContainer = Simulators.openCollapsiblePanel(fieldsetElementId, Translator.trans('FieldSet') + ' #' + fieldset.id + ' : ' +  $('<span>'+fieldset.legend + '</span>').text(), 'info',inClass, 'in', [{ 'class': 'delete-fieldset', 'label': Translator.trans('Delete'), 'icon': 'glyphicon-minus-sign' }, { 'class': 'add-field', 'label': Translator.trans('Add field'), 'icon': 'glyphicon-plus-sign' }, { 'class': 'edit-fieldset', 'label': Translator.trans('Edit'), 'icon': 'glyphicon-pencil' } ] );
+		var fieldsetPanelContainer;
+		if (fieldset.disposition == 'grid') {
+			fieldsetPanelContainer = Simulators.openCollapsiblePanel(fieldsetElementId, Translator.trans('FieldSet') + ' #' + fieldset.id + ' : ' +  $('<span>'+fieldset.legend + '</span>').text(), 'info',inClass, 'in', [{ 'class': 'delete-fieldset', 'label': Translator.trans('Delete'), 'icon': 'glyphicon-minus-sign' }, { 'class': 'edit-fieldset', 'label': Translator.trans('Edit'), 'icon': 'glyphicon-pencil' } ] );
+		} else {
+			fieldsetPanelContainer = Simulators.openCollapsiblePanel(fieldsetElementId, Translator.trans('FieldSet') + ' #' + fieldset.id + ' : ' +  $('<span>'+fieldset.legend + '</span>').text(), 'info',inClass, 'in', [{ 'class': 'delete-fieldset', 'label': Translator.trans('Delete'), 'icon': 'glyphicon-minus-sign' }, { 'class': 'add-field', 'label': Translator.trans('Add field'), 'icon': 'glyphicon-plus-sign' }, { 'class': 'edit-fieldset', 'label': Translator.trans('Edit'), 'icon': 'glyphicon-pencil' } ] );
+		}
 		var fieldsetPanelBody = fieldsetPanelContainer.find('.panel-body');
 		var fieldsetContainer = $('<div class="panel panel-default block-container fieldset" id="' + fieldsetElementId + '-attributes-panel" data-step="' + fieldset.stepId + '" data-panel="' + fieldset.panelId + '" data-id="' + fieldset.id + '"></div>');
 		var fieldsetContainerBody = $('<div class="panel-body"></div>');
@@ -2193,8 +2199,12 @@ THE SOFTWARE.
 		fieldsetContainer.append(fieldsetContainerBody);
 		fieldsetPanelBody.append(fieldsetContainer);
 		fieldsetContainerBody.append('<div class="panel panel-default legend-panel elements-container" id="' + fieldsetElementId + '-legend-panel"><div class="panel-heading">' + Translator.trans('Legend') + '</div><div class="panel-body fieldset-legend rich-text">' + fieldset.legend + '</div></div>');
-		fieldsetPanelBody.append('<div class="panel panel-default columns-panel" id="' + fieldsetElementId + '-columns-panel"><div class="panel-body sortable"></div></div>');
-		fieldsetPanelBody.append('<div class="panel panel-default fields-panel" id="' + fieldsetElementId + '-fields-panel"><div class="panel-body sortable"></div></div>');
+		if (fieldset.disposition == 'grid') {
+			fieldsetPanelBody.append('<div class="panel panel-default fieldset-grid-panel" id="fieldset-' + fieldset.id + '-fieldset-grid-panel"><div class="panel-heading"><button class="btn btn-default pull-right update-button add-column" data-parent="#fieldset-' + fieldset.id + '-fieldset-grid-panel" title="' + Translator.trans('Add column') + '"><span class="button-label">' + Translator.trans('Add column') + '</span> <span class="glyphicon glyphicon-plus-sign"></span></button><button class="btn btn-default pull-right update-button add-fieldrow" data-parent="#fieldset-' + fieldset.id + '-fieldset-grid-panel" title="' + Translator.trans('Add fieldrow') + '"><span class="button-label">' + Translator.trans('Add fieldrow') + '</span> <span class="glyphicon glyphicon-plus-sign"></span></button><h4 class="panel-title">' + Translator.trans('Grid') + '</h4></div><div class="panel-body"><div class="panel panel-default columns-panel" id="step-' + fieldset.stepId + '-panel-' + fieldset.panelId + '-fieldset-' + fieldset.id + '-columns-panel"><div class="panel-body sortable"></div></div><div class="panel panel-default fieldrows-panel" id="step-' + fieldset.stepId + '-panel-' + fieldset.panelId + '-fieldset-' + fieldset.id + '-fieldrows-panel"><div class="panel-body sortable"></div></div></div></div>');
+		} else {
+			fieldsetPanelBody.append('<div class="panel panel-default columns-panel" id="' + fieldsetElementId + '-columns-panel"><div class="panel-body sortable"></div></div>');
+			fieldsetPanelBody.append('<div class="panel panel-default fields-panel" id="' + fieldsetElementId + '-fields-panel"><div class="panel-body sortable"></div></div>');
+		}
 		return fieldsetPanelContainer;
 	}
 
@@ -2255,23 +2265,26 @@ THE SOFTWARE.
 			container = $("#steps .blocks-panel");
 		}
 		container.find('button.edit-fieldset').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editFieldSet($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-fieldset').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteFieldSet($($(this).attr('data-parent')));
 		});
 		container.find('button.add-field').click(function(e) {
-		    e.preventDefault();
-			Simulators.addField($($(this).attr('data-parent')));
+			e.preventDefault();
+			var fieldrowContainer = $($(this).attr('data-parent')).find('.fieldrow-container');
+			if (fieldrowContainer.length == 0) {
+				Simulators.addField($($(this).attr('data-parent')));
+			}
 		});
 		container.find('button.add-fieldrow').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addFieldRow($($(this).attr('data-parent')));
 		});
 		container.find('button.add-column').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addFieldSetColumn($($(this).attr('data-parent')));
 		});
 	}
@@ -2326,22 +2339,46 @@ THE SOFTWARE.
 			var oldLegend = '';
 			if ($(this).hasClass('validate-edit-fieldset')) {
 				var oldFieldSet = Simulators.findInArray(steps, [{ key: 'id', val: stepId, list: 'panels' }, { key: 'id', val: panelId, list: 'blocks' }, { key: 'id', val: id }]);
-				oldLegend = oldFieldSet.legend;
-				fieldset['fields'] = oldFieldSet['fields'];
+				if (oldFieldSet.disposition == 'grid') {
+					if (fieldset.disposition == 'grid') {
+						fieldset['columns'] = oldFieldSet['columns'];
+						fieldset['fieldrows'] = oldFieldSet['fieldrows'];
+					} else {
+						fieldset['fields'] = [];
+					}
+				} else if (fieldset.disposition == 'grid') {
+					fieldset['columns'] = [];
+					fieldset['fieldrows'] = [];
+				} else {
+					fieldset['fields'] = oldFieldSet['fields'];
+				}
 			} else {
-				fieldset['fields'] = [];
+				if (fieldset.disposition == 'grid') {
+					fieldset['columns'] = [];
+					fieldset['fieldrows'] = [];
+				} else {
+					fieldset['fields'] = [];
+				}
 			}
 			var newFieldSetPanel = Simulators.drawFieldSetForDisplay(fieldset, 'in');
 			if ($(this).hasClass('validate-edit-fieldset')) {
-				fieldsetContainer.replaceWith(newFieldSetPanel.find('.block-container.fieldset'));
-				if (fieldset.legend != oldLegend) {
-					fieldsetPanelContainer.find('> div > .panel-heading > h4 a').text(' ' + Translator.trans('FieldSet') + ' #' + fieldset.id + ' : ' +  $('<span>'+fieldset.legend + '</span>').text() + ' ');
-					Simulators.changeFieldSetLegendInRules(stepId, panelId, fieldset.id, fieldset.legend);
+				if (fieldset.disposition == oldFieldSet.disposition) {
+					fieldsetContainer.replaceWith(newFieldSetPanel.find('.block-container.fieldset'));
+					if (fieldset.legend != oldFieldSet.legend) {
+						fieldsetPanelContainer.find('> div > .panel-heading > h4 a').text(' ' + Translator.trans('FieldSet') + ' #' + fieldset.id + ' : ' +  $('<span>'+fieldset.legend + '</span>').text() + ' ');
+						Simulators.changeFieldSetLegendInRules(stepId, panelId, fieldset.id, fieldset.legend);
+					}
+					newFieldSetPanel = fieldsetPanelContainer;
+				} else {
+					fieldsetPanelContainer.replaceWith(newFieldSetPanel);
+					Simulators.bindFieldSetButtons(newFieldSetPanel);
+					Simulators.bindSortableFields(newFieldSetPanel.find('.fields-panel'));
+					Simulators.deleteFieldSetInActions(oldFieldSet.stepId, oldFieldSet.panelId, oldFieldSet.id);
+					Simulators.addFieldSetInActions(fieldset);
 				}
 				delete fieldset['stepId'];
 				delete fieldset['panelId'];
 				Simulators.updateInArray(steps, [{ key: 'id', val: stepId, list: 'panels' }, { key: 'id', val: panelId, list: 'blocks' }, { key: 'id', val: id }], fieldset);
-				newFieldSetPanel = fieldsetPanelContainer;
 			} else {
 				fieldsetPanelContainer.replaceWith(newFieldSetPanel);
 				Simulators.bindFieldSetButtons(newFieldSetPanel);
@@ -2639,11 +2676,11 @@ THE SOFTWARE.
 			container = $("#steps .columns-panel");
 		}
 		container.find('button.edit-column').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editFieldSetColumn($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-column').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteFieldSetColumn($($(this).attr('data-parent')));
 		});
 	}
@@ -2705,6 +2742,7 @@ THE SOFTWARE.
 			if ($(this).hasClass('validate-edit-column')) {
 				columnContainer.replaceWith(newFieldSetColumnPanel.find('.column-container'));
 				if (column.label != oldLabel) {
+					columnPanelContainer.find('> div > .panel-heading > h4 a').text(Translator.trans('Column #%id% : %label%', {'id': column.id, 'label': column.label }));
 					Simulators.changeFieldSetColumnLabelInRules(stepId, panelId, fieldsetId, column.id, column.label);
 				}
 				delete column['stepId'];
@@ -2759,7 +2797,7 @@ THE SOFTWARE.
 		var id = columnPanelContainer.find('.column-container').attr('data-id');
 		var fieldset = Simulators.findInArray(steps, [{ key: 'id', val: stepId, list: 'panels' }, { key: 'id', val: panelId, list: 'blocks' }, { key: 'id', val: fieldsetId }]);
 		var exists = false;
-			$.each(fieldset.columns, function(c, column) {
+		$.each(fieldset.columns, function(c, column) {
 			if (column.id != id && column.name == columnName) {
 				exists = true;
 				return false;
@@ -2889,13 +2927,18 @@ THE SOFTWARE.
 
 	Simulators.deleteFieldRowsColumn = function(stepId, panelId, fieldsetId, columnId) {
 		var fieldrows = $('#step-' + stepId + '-panel-' + panelId + '-fieldset-' + fieldsetId + '-fieldrows-panel').find('> .sortable').find('> div');
+		var deleted = [];
 		fieldrows.each(function(r) {
 			var fieldContainerGroups = $(this).find('.panel-group');
 			fieldContainerGroups.each(function(c) {
 				var fieldContainerGroup = $(this);
 				var column = fieldContainerGroup.find('.field-container');
 				if (column.attr('data-id') == columnId) {
-					Simulators.deleteField(fieldContainerGroup, false);
+					var elementId = fieldContainerGroup.attr('id')
+					if ($.inArray(elementId, deleted) < 0) {
+						Simulators.deleteField(fieldContainerGroup, false);
+						deleted.push(elementId);
+					}
 				}
 			});
 		});
@@ -3020,8 +3063,8 @@ THE SOFTWARE.
 
 	Simulators.checkAddFieldButton = function(fieldPanel) {
 		var fieldsPanel = fieldPanel.parents('.fields-panel');
-		var columnsPanel = fieldsPanel.parents('.columns-panel');
-		var fieldrowsPanel = fieldsPanel.parents('.fieldrows-panel');
+		var fieldsetGridPanel = fieldsPanel.parents('.fieldset-grid-panel');
+		var columnsPanel = fieldsetGridPanel.find('.columns-panel');
 		var nfields = fieldsPanel.find('> div.sortable > div').length;
 		var ncolumns = columnsPanel.find('> div.sortable > div').length;
 		if (nfields >= ncolumns) {
@@ -3094,15 +3137,15 @@ THE SOFTWARE.
 			container = $("#steps .fieldrows-panel");
 		}
 		container.find('button.edit-fieldrow').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editFieldRow($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-fieldrow').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteFieldRow($($(this).attr('data-parent')));
 		});
 		container.find('button.add-field').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addField($($(this).attr('data-parent')));
 		});
 	}
@@ -3170,6 +3213,7 @@ THE SOFTWARE.
 			if ($(this).hasClass('validate-edit-fieldrow')) {
 				fieldrowContainer.replaceWith(newFieldRowPanel.find('.fieldrow-container'));
 				if (fieldrow.label != oldLabel) {
+					fieldrowPanelContainer.find('> div > .panel-heading > h4 a').text(Translator.trans('Fieldrow #%id% : %label%', {'id': fieldrow.id, 'label': fieldrow.label }));
 					Simulators.changeFieldRowLabelInRules(stepId, panelId, fieldsetId, fieldrow.id, fieldrow.label);
 				}
 				delete fieldrow['stepId'];
@@ -3614,11 +3658,11 @@ THE SOFTWARE.
 			container = $("#steps .fields-panel");
 		}
 		container.find('button.edit-field').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editField($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-field').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteField($($(this).attr('data-parent')));
 		});
 	}
@@ -3932,6 +3976,8 @@ THE SOFTWARE.
 		if (disposition === 'grid') {
 			var fieldrow = Simulators.findInArray(steps, [{ key: 'id', val: stepId, list: 'panels' }, { key: 'id', val: panelId, list: 'blocks' }, { key: 'id', val: fieldsetId, list: 'fieldrows' }, { key: 'id', val: fieldrowId }]);
 			Simulators.renumberFields(fieldrow.fields, stepId, panelId, fieldsetId, fieldrowId, fparent.find('> div'));
+			Simulators.addFieldButtonToFieldRows(fparent.parents('.fieldset-grid-panel').eq(0));
+			Simulators.checkAddFieldButton(fparent);
 		} else {
 			var fieldset = Simulators.findInArray(steps, [{ key: 'id', val: stepId, list: 'panels' }, { key: 'id', val: panelId, list: 'blocks' }, { key: 'id', val: fieldsetId }]);
 			Simulators.renumberFields(fieldset.fields, stepId, panelId, fieldsetId, '', fparent.find('> div'));
@@ -4003,15 +4049,15 @@ THE SOFTWARE.
 			container = $("#steps .blocks-panel");
 		}
 		container.find('button.edit-blockinfo').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editBlockInfo($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-blockinfo').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteBlockInfo($($(this).attr('data-parent')));
 		});
 		container.find('button.add-chapter').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addChapter($($(this).attr('data-parent')));
 		});
 	}
@@ -4417,15 +4463,15 @@ THE SOFTWARE.
 			container = $("#steps .chapters-panel");
 		}
 		container.find('button.edit-chapter').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editChapter($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-chapter').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteChapter($($(this).attr('data-parent')));
 		});
 		container.find('button.add-section').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.addSection($($(this).attr('data-parent')));
 		});
 	}
@@ -4830,11 +4876,11 @@ THE SOFTWARE.
 			container = $("#steps .sections-panel");
 		}
 		container.find('button.edit-section').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.editSection($($(this).attr('data-parent')));
 		});
 		container.find('button.delete-section').click(function(e) {
-		    e.preventDefault();
+			e.preventDefault();
 			Simulators.deleteSection($($(this).attr('data-parent')));
 		});
 	}

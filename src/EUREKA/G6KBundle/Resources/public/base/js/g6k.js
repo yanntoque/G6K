@@ -1930,6 +1930,7 @@ THE SOFTWARE.
 
 	function Token(type, value) {
 		this.type  = type;
+		this.arity = 0;
 		this.value = value;
 	};
 
@@ -2209,6 +2210,10 @@ THE SOFTWARE.
 						while (stack.length != 0 && stack[stack.length-1].type != Token.TYPE.T_POPEN) {
 							rpn.push(stack.pop());
 						}
+						if (stack.length > 1
+							&& stack[stack.length-2].type == Token.TYPE.T_FUNCTION) {
+							stack[stack.length-2].arity++;
+						}
 						break;
 					case Token.TYPE.T_NUMBER:
 					case Token.TYPE.T_DATE:
@@ -2231,6 +2236,7 @@ THE SOFTWARE.
 						stack.pop();
 						if (stack.length != 0
 							&& stack[stack.length-1].type == Token.TYPE.T_FUNCTION) {
+							stack[stack.length-1].arity++;
 							rpn.push(stack.pop());
 						}
 						break;
@@ -2747,6 +2753,7 @@ THE SOFTWARE.
 				"atan": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.atan(a); }],
 				"atan2": [2, [Token.TYPE.T_NUMBER, Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a, b) { return Math.atan2(a, b); }],
 				"atanh": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.atanh(a); }],
+				"ceil": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.ceil(a); }],
 				"concat": [-1, [Token.TYPE.T_TEXT], Token.TYPE.T_TEXT, function(a) {
 					var c = '';
 					$.each(a, function(i, v) {
@@ -2754,7 +2761,6 @@ THE SOFTWARE.
 					});
 					return c; 
 				}],
-				"ceil": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.ceil(a); }],
 				"cos": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.cos(a); }],
 				"cosh": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.cosh(a); }],
 				"count": [-1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) {
@@ -2774,13 +2780,14 @@ THE SOFTWARE.
 				"get": [2, [Token.TYPE.T_ARRAY, Token.TYPE.T_NUMBER], Token.TYPE.T_TEXT, function(a, b) { return b < a.lengh + 1 ? a[b - 1] : ''; }],
 				"lastday": [2, [Token.TYPE.T_NUMBER, Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a, b) { var d = Date.createFromFormat('Y-n-j', a + '-' + b + '-1' );return d.lastday(false); }],
 				"lastDayOfMonth": [1, [Token.TYPE.T_DATE], Token.TYPE.T_DATE, function(a) { return a.lastDayOfMonth(); }],
+				"lcfirst": [1, [Token.TYPE.T_TEXT], Token.TYPE.T_TEXT, function(a) { return a.replace(/(^[A-Z])/,function (p) { return p.toLowerCase(); } ); }],
 				"length": [1, [Token.TYPE.T_TEXT], Token.TYPE.T_NUMBER, function(a) { return a.length; }],
 				"log": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.log(a); }],
 				"log10": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.log10(a); }],
 				"lower": [1, [Token.TYPE.T_TEXT], Token.TYPE.T_TEXT, function(a) { return a.toLowerCase(); }],
 				"match": [2, [Token.TYPE.T_TEXT, Token.TYPE.T_TEXT], Token.TYPE.T_BOOLEAN, function(a, b) { return b.match(a) != null; }],
-				"max": [2, [Token.TYPE.T_NUMBER, Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a, b) { return Math.max(a, b); }],
-				"min": [2, [Token.TYPE.T_NUMBER, Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a, b) { return Math.min(a, b); }],
+				"max": [-1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.max.apply(null, a); }],
+				"min": [-1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.min.apply(null, a); }],
 				"money": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_TEXT, function(a) { return accounting.formatNumber(a, 2, " ", ",").toString(); }],
 				"month": [1, [Token.TYPE.T_DATE], Token.TYPE.T_NUMBER, function(a) { return a.getMonth() + 1; }],
 				"nextWorkDay": [1, [Token.TYPE.T_DATE], Token.TYPE.T_DATE, function(a) { return a.nextWorkingDay(); }],
@@ -2805,6 +2812,8 @@ THE SOFTWARE.
 				}],
 				"tan": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.tan(a); }],
 				"tanh": [1, [Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a) { return Math.tanh(a); }],
+				"trim": [1, [Token.TYPE.T_TEXT], Token.TYPE.T_TEXT, function(a) { return $.trim(a); }],
+				"ucfirst": [1, [Token.TYPE.T_TEXT], Token.TYPE.T_TEXT, function(a) { return a.replace(/(^[a-z])/,function (p) { return p.toUpperCase(); } ); }],
 				"upper": [1, [Token.TYPE.T_TEXT], Token.TYPE.T_TEXT, function(a) { return a.toUpperCase(); }],
 				"workdays": [2, [Token.TYPE.T_DATE, Token.TYPE.T_DATE], Token.TYPE.T_NUMBER, function(a, b) { return a.workingDaysBefore(b); }],
 				"workdaysofmonth": [2, [Token.TYPE.T_NUMBER, Token.TYPE.T_NUMBER], Token.TYPE.T_NUMBER, function(a, b) {
@@ -2833,7 +2842,7 @@ THE SOFTWARE.
 			var argc = functions[func.value][0];
 			var variableArgsCount = false;
 			if (argc == -1) {
-				argc = args.length;
+				argc = func.arity;
 				variableArgsCount = true;
 			}
 			if (args.length < argc) {
@@ -2869,7 +2878,7 @@ THE SOFTWARE.
 						throw new Error("Illegal type for argument '" + arg + "' : operand must be a " + expected + " for " + func);
 					}
 				} else if (arg.isVariable()) {
-					arg.value = undefined;
+					return new Token(Token.TYPE.T_UNDEFINED, [arg]);
 				}
 				argv.unshift(arg.value); 
 			}
