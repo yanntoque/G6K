@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * Custom exception listener
  *
- * @copyright Jacques Archimède
+ * @copyright Jacques ArchimÃ¨de
  *
  */
 class G6KExceptionListener
@@ -84,7 +84,7 @@ class G6KExceptionListener
 				$view = "Default";
 			}
 		}
-		$message = $exception->getStatusCode() == 404 ? 'This simulator does not exist or is not available' : 'The simulation engine is currently under maintenance';
+		$message = $exception instanceof HttpExceptionInterface && $exception->getStatusCode() == 404 ? 'This simulator does not exist or is not available' : 'The simulation engine is currently under maintenance';
 		$template = <<<EOT
 {% extends "EUREKAG6KBundle:{$view}/layout:pagelayout.html.twig" %}
 {% block content %}
